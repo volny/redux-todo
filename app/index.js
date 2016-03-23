@@ -160,6 +160,13 @@ class TodoApp extends Component {
     })
     this.input.value = ''
   }
+  handleCompleted = (id) => {
+    store.dispatch({
+      type: 'TOGGLE_TODO',
+      id
+    })
+    console.log(store.getState())
+  }
   render() {
     return (
       <div>
@@ -171,7 +178,12 @@ class TodoApp extends Component {
         </button>
         <ul>
           {this.props.todos.map(todo =>
-            <li key={todo.id}>
+            <li
+              key={todo.id}
+              onClick={this.handleCompleted.bind(null, todo.id)}
+              style={{textDecoration: todo.completed
+                ? 'line-through'
+                : 'none'}}>
               {todo.text}
             </li>
           )}
