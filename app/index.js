@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
 import deepfreeze from 'deep-freeze'
@@ -129,33 +129,62 @@ console.log('All tests passed')
 
 const store = createStore(todoApp)
 
-store.dispatch({
-  type: 'ADD_TODO',
-  id: 0,
-  text: 'Learn Redux'
-})
-
-store.dispatch({
-  type: 'TOGGLE_TODO',
-  id: 0
-})
-
-store.dispatch({
-  type: 'SET_VISIBILITY_FILTER',
-  filter: 'SHOW_COMPLETED'
-})
+//store.dispatch({
+//  type: 'ADD_TODO',
+//  id: 0,
+//  text: 'Learn Redux'
+//})
+//
+//store.dispatch({
+//  type: 'TOGGLE_TODO',
+//  id: 0
+//})
+//
+//store.dispatch({
+//  type: 'SET_VISIBILITY_FILTER',
+//  filter: 'SHOW_COMPLETED'
+//})
 
 console.log(store.getState())
 
 //////////REACT
 
-const Comp = () => {
-  return (
-    <div>hello</div>
-  )
+let _ID = 0
+
+class TodoApp extends Component {
+  handleAdd = () => {
+    store.dispatch({
+     type: 'ADD_TODO',
+     text: this.input.value,
+     id: _ID++
+    })
+    this.input.value = ''
+  }
+  render() {
+    return (
+      <div>
+        <input ref={node => {
+          this.input = node
+        }}/>
+        <button onClick={this.handleAdd}>
+          Add Todo
+        </button>
+        <ul>
+          {this.props.todos.map(todo =>
+            <li key={todo.id}>
+              {todo.text}
+            </li>
+          )}
+        </ul>
+      </div>
+    )
+  }
 }
 
-ReactDOM.render(
-  <Comp/>,
+const render = () => ReactDOM.render(
+  <TodoApp todos={store.getState().todos}/>,
   document.getElementById('app')
 )
+
+store.subscribe(render)
+render()
