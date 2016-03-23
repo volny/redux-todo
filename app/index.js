@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import deepfreeze from 'deep-freeze'
 import expect from 'expect'
 
@@ -25,7 +25,7 @@ const todo = (state, action) => {
   }
 }
 
-const todos = (state = [], action) => {
+const todos = (state=[], action) => {
   switch (action.type) {
     case 'ADD_TODO':
       return [
@@ -40,15 +40,25 @@ const todos = (state = [], action) => {
 }
 
 const toggleTodo = (todo) => {
-  // `Object.assign` is new in ES6, assign properties onto a target object
-  // passing in multiple values overwrites previous ('last one wins')
-  //return Object.assign({}, todo, {completed: !todo.completed})
-  // or use ES7 object spread operator
   return {
     ...todo,
     completed: !todo.completed
   }
 }
+
+const visibilityFilter = (state='SHOW_ALL', action) => {
+  switch (action.type) {
+    case 'SET_VISIBILITY_FILTER':
+      return action.filter
+    default:
+      return state
+  }
+}
+
+const todoApp = combineReducers({
+  todos,
+  visibilityFilter
+})
 
 ////////// TESTS
 
@@ -117,7 +127,7 @@ console.log('All tests passed')
 
 //////////REDUX
 
-const store = createStore(todos)
+const store = createStore(todoApp)
 
 store.dispatch({
   type: 'ADD_TODO',
@@ -128,6 +138,11 @@ store.dispatch({
 store.dispatch({
   type: 'TOGGLE_TODO',
   id: 0
+})
+
+store.dispatch({
+  type: 'SET_VISIBILITY_FILTER',
+  filter: 'SHOW_COMPLETED'
 })
 
 console.log(store.getState())
