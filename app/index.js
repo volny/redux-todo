@@ -175,6 +175,9 @@ class FilterLink extends Component {
     })
   }
   render() {
+    if (this.props.filter === this.props.currentFilter) {
+      return <span>{this.props.children}</span>
+    }
     return (
       <a href='#'
         onClick={this.handleVisibility}>
@@ -200,9 +203,10 @@ class TodoApp extends Component {
     })
   }
   render() {
+    const {todos, visibilityFilter} = this.props
     const visibleTodos = getVisibleTodos(
-      this.props.todos,
-      this.props.visibilityFilter
+      todos,
+      visibilityFilter
     )
     return (
       <div>
@@ -228,15 +232,21 @@ class TodoApp extends Component {
         <p>
           Show:
           {' '}
-          <FilterLink filter='SHOW_ALL'>
+          <FilterLink
+            filter='SHOW_ALL'
+            currentFilter={visibilityFilter}>
             All
           </FilterLink>
           {' '}
-          <FilterLink filter='SHOW_ACTIVE'>
+          <FilterLink
+            filter='SHOW_ACTIVE'
+            currentFilter={visibilityFilter}>
             Active
           </FilterLink>
           {' '}
-          <FilterLink filter='SHOW_COMPLETED'>
+          <FilterLink
+            filter='SHOW_COMPLETED'
+            currentFilter={visibilityFilter}>
             Completed
           </FilterLink>
         </p>
