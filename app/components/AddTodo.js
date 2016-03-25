@@ -12,7 +12,9 @@ export default ({handleAdd}) => {
       <input ref={node => input = node}/>
       <div style={styles}>
         <button
-          onClick={() => handleAdd(input)}>
+          onClick={() => {
+            () => handleAdd(input.value)
+            input.value = ''}}>
           Add Todo
         </button>
       </div>

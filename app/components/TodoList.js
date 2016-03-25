@@ -8,6 +8,7 @@ export default ({visibleTodos, handleCompleted}) => (
         key={todo.id}
         handleCompleted={handleCompleted}
         {...todo}/>
-    )}
+      )
+    }
   </ul>
 )

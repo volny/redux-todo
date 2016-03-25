@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { render } from 'react-dom'
-import TodoApp from './components/TodoApp'
+import Main from './containers/Main'
 import { store } from './app'
 
 const _render = () => render(
-  <TodoApp {...store.getState()}/>,
+  <Main {...store.getState()}/>,
   document.getElementById('app')
 )
 

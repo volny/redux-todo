@@ -5,15 +5,7 @@ const styles = {
   padding: '0 3px'
 }
 
-const handleVisibility = (e, filter) => {
-  e.preventDefault
-  store.dispatch({
-    type: 'SET_VISIBILITY_FILTER',
-    filter
-  })
-}
-
-export default ({filter, currentFilter, children}) => {
+export default ({filter, currentFilter, handleVisibility, children}) => {
   if (filter === currentFilter) {
     return <span style={styles}>{children}</span>
   }
