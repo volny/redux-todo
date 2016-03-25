@@ -1,23 +1,27 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { store } from '../app'
 
-export default class FilterLink extends Component {
-  handleVisibility = (e) => {
-    e.preventDefault()
-    store.dispatch({
-      type: 'SET_VISIBILITY_FILTER',
-      filter: this.props.filter
-    })
+const styles = {
+  padding: '0 3px'
+}
+
+const handleVisibility = (e, filter) => {
+  e.preventDefault
+  store.dispatch({
+    type: 'SET_VISIBILITY_FILTER',
+    filter
+  })
+}
+
+export default ({filter, currentFilter, children}) => {
+  if (filter === currentFilter) {
+    return <span style={styles}>{children}</span>
   }
-  render() {
-    if (this.props.filter === this.props.currentFilter) {
-      return <span>{this.props.children}</span>
-    }
-    return (
-      <a href='#'
-        onClick={e => this.handleVisibility(e)}>
-        {this.props.children}
-      </a>
-    )
-  }
+  return (
+    <a href="#"
+      onClick={e => handleVisibility(e, filter)}
+      style={styles}>
+      {children}
+    </a>
+  )
 }
