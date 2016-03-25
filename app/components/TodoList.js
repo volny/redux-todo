@@ -1,9 +1,9 @@
 import React from 'react'
 import TodoItem from './TodoItem'
 
-export default ({visibleTodos, handleCompleted}) => (
+export default ({todos, handleCompleted}) => (
   <ul>
-    {visibleTodos.map(todo =>
+    {todos.map(todo =>
       <TodoItem
         key={todo.id}
         handleCompleted={handleCompleted}

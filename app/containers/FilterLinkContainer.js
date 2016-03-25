@@ -3,15 +3,23 @@ import FilterLink from '../components/FilterLink'
 import { store } from '../app'
 
 export default class FilterLinkContainer extends Component {
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() =>
+      this.forceUpdate()
+    )
+  }
+  componentWillUnmout() {
+    this.unsubscribe()
+  }
   handleVisibility = (e) => {
-    e.preventDefault
+    e.preventDefault()
     store.dispatch({
       type: 'SET_VISIBILITY_FILTER',
       filter: this.props.filter
     })
   }
   render() {
-    const state = store.getState
+    const state = store.getState()
 
     return (
       <FilterLink
