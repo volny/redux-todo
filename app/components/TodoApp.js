@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
-import FilterLink from './FilterLink'
 import { visibilityFilter, getVisibleTodos, store } from '../app'
+import TodoList from './TodoList'
+import AddTodo from './AddTodo'
+import FilterLinks from './FilterLinks'
 
 // TODO this should probably be in the component state
 let _ID = 0
 
 export default class TodoApp extends Component {
-  handleAdd = () => {
+  handleAdd = (input) => {
     store.dispatch({
      type: 'ADD_TODO',
-     text: this.input.value,
+     text: input.value,
      id: _ID++
     })
-    this.input.value = ''
+    input.value = ''
   }
   handleCompleted = (id) => {
     store.dispatch({
@@ -28,46 +30,12 @@ export default class TodoApp extends Component {
     )
     return (
       <div>
-        <input ref={node => {
-          this.input = node
-        }}/>
-        {' '}
-        <button onClick={this.handleAdd}>
-          Add Todo
-        </button>
-        <ul>
-          {visibleTodos.map(todo =>
-            <li
-              key={todo.id}
-              onClick={this.handleCompleted.bind(null, todo.id)}
-              style={{textDecoration: todo.completed
-                ? 'line-through'
-                : 'none'}}>
-              {todo.text}
-            </li>
-          )}
-        </ul>
-        <p>
-          Show:
-          {' '}
-          <FilterLink
-            filter='SHOW_ALL'
-            currentFilter={visibilityFilter}>
-            All
-          </FilterLink>
-          {' '}
-          <FilterLink
-            filter='SHOW_ACTIVE'
-            currentFilter={visibilityFilter}>
-            Active
-          </FilterLink>
-          {' '}
-          <FilterLink
-            filter='SHOW_COMPLETED'
-            currentFilter={visibilityFilter}>
-            Completed
-          </FilterLink>
-        </p>
+        <AddTodo
+          handleAdd={this.handleAdd}/>
+        <TodoList
+          visibleTodos={visibleTodos}
+          handleCompleted={this.handleCompleted}/>
+        <FilterLinks/>
       </div>
     )
   }
