@@ -59,9 +59,5 @@ export const getVisibleTodos = (todos, filter) => {
   }
 }
 
-const todoApp = combineReducers({
-  todos,
-  visibilityFilter
-})
-
+const todoApp = combineReducers({todos, visibilityFilter})
 export const store = createStore(todoApp)

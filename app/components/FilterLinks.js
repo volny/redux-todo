@@ -2,7 +2,7 @@ import React from 'react'
 import FilterLink from './FilterLink'
 import { visibilityFilter } from '../app'
 
-export default () => (
+export default ({visibilityFilter}) => (
   <p>
     Show:
     {' '}

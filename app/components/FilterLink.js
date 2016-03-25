@@ -15,7 +15,7 @@ export default class FilterLink extends Component {
     }
     return (
       <a href='#'
-        onClick={this.handleVisibility}>
+        onClick={e => this.handleVisibility(e)}>
         {this.props.children}
       </a>
     )

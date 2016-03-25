@@ -24,10 +24,7 @@ export default class TodoApp extends Component {
   }
   render() {
     const {todos, visibilityFilter} = this.props
-    const visibleTodos = getVisibleTodos(
-      todos,
-      visibilityFilter
-    )
+    const visibleTodos = getVisibleTodos(todos, visibilityFilter)
     return (
       <div>
         <AddTodo
@@ -35,7 +32,8 @@ export default class TodoApp extends Component {
         <TodoList
           visibleTodos={visibleTodos}
           handleCompleted={this.handleCompleted}/>
-        <FilterLinks/>
+        <FilterLinks
+          visibilityFilter={visibilityFilter}/>
       </div>
     )
   }
