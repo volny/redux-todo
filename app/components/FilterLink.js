@@ -5,13 +5,13 @@ const styles = {
   padding: '0 3px'
 }
 
-export default ({filter, currentFilter, handleVisibility, children}) => {
-  if (filter === currentFilter) {
+export default ({active, handleVisibility, children}) => {
+  if (active) {
     return <span style={styles}>{children}</span>
   }
   return (
     <a href="#"
-      onClick={e => handleVisibility(e, filter)}
+      onClick={e => handleVisibility(e)}
       style={styles}>
       {children}
     </a>

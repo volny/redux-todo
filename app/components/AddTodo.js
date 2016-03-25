@@ -13,7 +13,7 @@ export default ({handleAdd}) => {
       <div style={styles}>
         <button
           onClick={() => {
-            () => handleAdd(input.value)
+            handleAdd(input.value)
             input.value = ''}}>
           Add Todo
         </button>
