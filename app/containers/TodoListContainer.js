@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { store, getVisibleTodos } from '../app'
 import TodoList from '../components/TodoList'
 
-export default class VisibleTodoList extends Component {
+export default class TodoListContainer extends Component {
   componentDidMount() {
     this.unsubscribe = store.subscribe(() =>
       this.forceUpdate())

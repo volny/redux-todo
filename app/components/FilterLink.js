@@ -1,5 +1,4 @@
 import React from 'react'
-import { store } from '../app'
 
 const styles = {
   padding: '0 3px'
