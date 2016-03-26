@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import FilterLink from '../components/FilterLink'
-import { store } from '../app'
 
 export default class FilterLinkContainer extends Component {
   componentDidMount() {
-    this.unsubscribe = store.subscribe(() =>
+    this.unsubscribe = this.props.store.subscribe(() =>
       this.forceUpdate()
     )
   }
@@ -13,19 +12,19 @@ export default class FilterLinkContainer extends Component {
   }
   handleVisibility = (e) => {
     e.preventDefault()
-    store.dispatch({
+    this.props.store.dispatch({
       type: 'SET_VISIBILITY_FILTER',
       filter: this.props.filter
     })
   }
   render() {
+    const { store, filter, children } = this.props
     const state = store.getState()
-
     return (
       <FilterLink
-        active={this.props.filter === state.visibilityFilter}
+        active={filter === state.visibilityFilter}
         handleVisibility={this.handleVisibility}>
-        {this.props.children}
+        {children}
       </FilterLink>
     )
   }

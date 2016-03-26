@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
-import { store, getVisibleTodos } from '../app'
+import { getVisibleTodos } from '../app'
 import TodoList from '../components/TodoList'
 
 export default class TodoListContainer extends Component {
   componentDidMount() {
-    this.unsubscribe = store.subscribe(() =>
+    this.unsubscribe = this.props.store.subscribe(() =>
       this.forceUpdate())
   }
   componentWillUnmout() {
     this.unsubscribe()
   }
   handleCompleted = (id) => {
-    store.dispatch({
+    this.props.store.dispatch({
       type: 'TOGGLE_TODO',
       id
     })
   }
   render() {
-    const state = store.getState()
+    const state = this.props.store.getState()
     return (
       <TodoList
         todos={getVisibleTodos(

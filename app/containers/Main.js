@@ -5,11 +5,12 @@ import TodoListContainer from '../containers/TodoListContainer'
 
 export default class Main extends Component {
   render() {
+    const { store } = this.props
     return (
       <div>
-        <InputContainer/>
-        <TodoListContainer/>
-        <FilterLinks/>
+        <InputContainer store={store}/>
+        <TodoListContainer store={store}/>
+        <FilterLinks store={store}/>
       </div>
     )
   }

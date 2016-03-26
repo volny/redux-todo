@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { store } from '../app'
 import Input from '../components/Input'
 
 let nextID = 0
 
 export default class InputContainer extends Component {
   handleAdd = (input) => {
-    store.dispatch({
+    this.props.store.dispatch({
       type: 'ADD_TODO',
       id: nextID++,
       text: input.value
