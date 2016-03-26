@@ -1,35 +1,58 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import FilterLink from '../components/FilterLink'
+import { connect } from 'react-redux'
 
-export default class FilterLinkContainer extends Component {
-  componentDidMount() {
-    this.unsubscribe = this.context.store.subscribe(() =>
-      this.forceUpdate()
-    )
-  }
-  componentWillUnmout() {
-    this.unsubscribe()
-  }
-  handleVisibility = (e) => {
-    e.preventDefault()
-    this.context.store.dispatch({
-      type: 'SET_VISIBILITY_FILTER',
-      filter: this.props.filter
-    })
-  }
-  render() {
-    const { filter, children } = this.props
-    const state = this.context.store.getState()
-    return (
-      <FilterLink
-        active={filter === state.visibilityFilter}
-        handleVisibility={this.handleVisibility}>
-        {children}
-      </FilterLink>
-    )
+const mapStateToProps = (state, props) => {
+  return {
+    active: props.filter === state.visibilityFilter
   }
 }
 
-FilterLinkContainer.contextTypes = {
-  store: PropTypes.object
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    handleVisibility: () => {
+      dispatch({
+        type: 'SET_VISIBILITY_FILTER',
+        filter: props.filter
+      })
+    }
+  }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FilterLink)
+
+//export default class FilterLinkContainer extends Component {
+//  componentDidMount() {
+//    this.unsubscribe = this.context.store.subscribe(() =>
+//      this.forceUpdate()
+//    )
+//  }
+//  componentWillUnmout() {
+//    this.unsubscribe()
+//  }
+//  handleVisibility = (e) => {
+//    e.preventDefault()
+//    this.context.store.dispatch({
+//      type: 'SET_VISIBILITY_FILTER',
+//      filter: this.props.filter
+//    })
+//  }
+//  render() {
+//    const { filter, children } = this.props
+//    const state = this.context.store.getState()
+//    return (
+//      <FilterLink
+//        active={filter === state.visibilityFilter}
+//        handleVisibility={this.handleVisibility}>
+//        {children}
+//      </FilterLink>
+//    )
+//  }
+//}
+//
+//FilterLinkContainer.contextTypes = {
+//  store: PropTypes.object
+//}

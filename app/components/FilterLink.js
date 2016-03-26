@@ -10,7 +10,7 @@ export default ({active, handleVisibility, children}) => {
   }
   return (
     <a href="#"
-      onClick={e => handleVisibility(e)}
+      onClick={() => handleVisibility()}
       style={styles}>
       {children}
     </a>

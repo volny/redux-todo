@@ -1,11 +1,12 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import Input from '../components/Input'
+import { connect } from 'react-redux'
 
 let nextID = 0
 
-export default class InputContainer extends Component {
+class InputContainer extends Component {
   handleAdd = (input) => {
-    this.context.store.dispatch({
+    this.props.dispatch({
       type: 'ADD_TODO',
       id: nextID++,
       text: input.value
@@ -26,6 +27,10 @@ export default class InputContainer extends Component {
   }
 }
 
-InputContainer.contextTypes = {
-  store: PropTypes.object
-}
+//export default connect (
+//  state => ({}),
+//  dispatch => ({dispatch})
+//)(InputContainer)
+// default behavior for `connect` is to inject no state, and dispatch
+// so there's this shortcut
+export default connect()(InputContainer)
