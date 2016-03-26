@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import Input from '../components/Input'
 
 let nextID = 0
 
 export default class InputContainer extends Component {
   handleAdd = (input) => {
-    this.props.store.dispatch({
+    this.context.store.dispatch({
       type: 'ADD_TODO',
       id: nextID++,
       text: input.value
@@ -24,4 +24,8 @@ export default class InputContainer extends Component {
         onEnterSubmit={this.handleEnterSubmit}/>
     )
   }
+}
+
+InputContainer.contextTypes = {
+  store: PropTypes.object
 }

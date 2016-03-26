@@ -2,22 +2,19 @@ import React from 'react'
 import FilterLinkContainer from '../containers/FilterLinkContainer'
 import { visibilityFilter } from '../app'
 
-export default ({store}) => (
+export default () => (
   <p>
     Show:
     <FilterLinkContainer
-      filter='SHOW_ALL'
-      store={store}>
+      filter='SHOW_ALL'>
       All
     </FilterLinkContainer>
     <FilterLinkContainer
-      filter='SHOW_ACTIVE'
-      store={store}>
+      filter='SHOW_ACTIVE'>
       Active
     </FilterLinkContainer>
     <FilterLinkContainer
-      filter='SHOW_COMPLETED'
-      store={store}>
+      filter='SHOW_COMPLETED'>
       Completed
     </FilterLinkContainer>
   </p>
