@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 import Input from '../components/Input'
 import { connect } from 'react-redux'
+import { addTodo } from '../actions'
 
-let nextID = 0
 
 class InputContainer extends Component {
   handleAdd = (input) => {
-    this.props.dispatch({
-      type: 'ADD_TODO',
-      id: nextID++,
-      text: input.value
-    })
-    input.value = ''
+    if (input.value.trim()) {
+      this.props.dispatch(addTodo(input.value))
+      input.value = ''
+    }
   }
   handleEnterSubmit = (e) => {
     if (e.keyCode === 13) {
@@ -21,7 +19,7 @@ class InputContainer extends Component {
   render() {
     return (
       <Input
-        handleAdd={this.handleAdd}
+        onAdd={this.handleAdd}
         onEnterSubmit={this.handleEnterSubmit}/>
     )
   }

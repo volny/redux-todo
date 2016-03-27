@@ -1,6 +1,5 @@
 import React from 'react'
 import FilterLinkContainer from '../containers/FilterLinkContainer'
-import { visibilityFilter } from '../app'
 
 export default () => (
   <p>

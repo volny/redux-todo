@@ -1,13 +1,11 @@
 import React from 'react'
 
-let nextID = 0
-
 const styles = {
   padding: '0 5px',
   display: 'inline'
 }
 
-export default ({handleAdd, onEnterSubmit}) => {
+export default ({onAdd, onEnterSubmit}) => {
   let input
   return (
     <div>
@@ -16,8 +14,7 @@ export default ({handleAdd, onEnterSubmit}) => {
         ref={node => input = node}/>
       <div style={styles}>
         <button
-          onClick={() => handleAdd(input)}
-          className='pure-button'>
+          onClick={() => onAdd(input)}>
           Add Todo
         </button>
       </div>

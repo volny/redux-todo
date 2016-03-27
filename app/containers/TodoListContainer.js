@@ -1,7 +1,8 @@
 import React from 'react'
-import { getVisibleTodos } from '../app'
+import { getVisibleTodos } from '../reducers'
 import TodoList from '../components/TodoList'
 import { connect } from 'react-redux'
+import { toggleTodo } from '../actions'
 
 // https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
 
@@ -14,7 +15,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleCompleted: id => {
-      dispatch({type: 'TOGGLE_TODO', id})
+      dispatch(toggleTodo(id))
     }
   }
 }
